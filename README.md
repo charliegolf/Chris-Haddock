@@ -3,6 +3,8 @@ Haddock
 
 Simple asp.net web tool for recording session-based testing. So named because it's not add hoc testing :)
 
+See [Wikipedia's entry](https://en.wikipedia.org/wiki/Session-based_testing) for details.
+
 Thank yous
 ==========
 
