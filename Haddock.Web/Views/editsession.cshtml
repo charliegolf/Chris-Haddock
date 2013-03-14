@@ -1,0 +1,206 @@
+@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<Haddock.Web.ViewModels.SessionEditViewModel>
+<!DOCTYPE html>
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+
+    <title>Edit Session</title>
+
+    <link rel="stylesheet" href="/content/css/normalize.css" />
+    <link rel="stylesheet" href="/content/css/foundation.min.css" />
+
+    <script src="/content/js/custom.modernizr.js"></script>
+
+    <!-- IE Fix for HTML5 Tags -->
+	<!--[if lt IE 9]>
+		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+
+</head>
+<body>
+
+        <div class="container">
+
+        <header>
+            <div class="row">
+                <div class="twelve columns">
+                    <h1>Edit session</h1>
+                    <p><a href="/">home</a></p>
+                </div>
+            </div>
+        </header>
+
+        <section id="mainContent">
+
+            <div class="row">
+                <div class="twelve columns">
+
+                    <form action="/session/edit/@Model.Id"  method="post">
+
+                        <fieldset>
+                            <legend>Session details</legend>
+
+                            <div class="row">
+                                <div class="large-4 columns">
+                                    <label>Team</label>
+                                    <select id="TeamId" name="TeamId">
+                                    @foreach (var team in Model.AllTeams)
+                                    {
+                                        if (Model.TeamId == team.Id)
+                                        {
+                                            <option value="@team.Id" selected="selected">@team.Name</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@team.Id">@team.Name</option>
+                                        }
+                                    }
+                                    </select>
+                                </div>
+
+                                <div class="large-4 columns">
+                                    <label>Iteration</label>
+                                    <select id="IterationId" name="IterationId">
+                                    @foreach (var iter in Model.AllIterations)
+                                    {
+                                        if (Model.IterationId == iter.Id)
+                                        {
+                                            <option value="@iter.Id" selected="selected">@iter.Name</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@iter.Id">@iter.Name</option>
+                                        }
+                                    }
+                                    </select>
+                                </div>
+
+                                <div class="large-4 columns">
+                                    <label>Product Area</label>
+                                    <select id="ProductAreaId" name="ProductAreaId">
+                                    @foreach (var productArea in Model.AllProductAreas)
+                                    {
+                                        if (Model.ProductAreaId == productArea.Id)
+                                        {
+                                            <option value="@productArea.Id" selected="selected">@productArea.Name</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@productArea.Id">@productArea.Name</option>
+                                        }
+                                    }
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="large-6 columns">
+                                    <label>Tester</label>
+                                    <select id="TesterId" name="TesterId">
+                                    @foreach (var tester in Model.AllTesters)
+                                    {
+                                        if (Model.TesterId == tester.Id)
+                                        {
+                                            <option value="@tester.Id" selected="selected">@tester.Name</option>
+                                        }
+                                        else
+                                        {   
+                                            <option value="@tester.Id">@tester.Name</option>
+                                        }
+                                    }
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="large-12 columns">
+                                    <label>Mission</label>
+                                    <textarea name="Mission" id="Mission" placeholder="Session mission" >@Model.Mission</textarea>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="large-12 columns">
+                                    <label>Setup</label>
+                                    <textarea name="Setup" id="Setup" placeholder="Session setup" >@Model.Setup</textarea>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="large-12 columns">
+                                    <label>Risks to mitigate</label>
+                                    <textarea name="RisksToMigate" id="RisksToMigate" placeholder="Session risks" >@Model.RisksToMitigate</textarea>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="large-12 columns">
+                                    <label>Tasks</label>
+                                    <textarea name="Tasks" id="Tasks" placeholder="Session tasks" >@Model.Tasks</textarea>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="large-12 columns">
+                                    <label>Bugs</label>
+                                    <textarea name="Bugs" id="Bugs" placeholder="Session bugs" >@Model.Bugs</textarea>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="large-12 columns">
+                                    <label>Issues</label>
+                                    <textarea name="Issues" id="Issues" placeholder="Session issues" >@Model.Issues</textarea>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="large-12 columns">
+                                    <label>Notes</label>
+                                    <textarea name="Notes" id="Notes" placeholder="Session notes" >@Model.Notes</textarea>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="large-12 columns">
+                                    <label>Handover</label>
+                                    <textarea name="Handover" id="Handover" placeholder="Session handover" >@Model.Handover</textarea>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="large-12 columns">
+                                    <input type="hidden" id="Id" name="Id" value="@Model.Id" />
+                                    <input type="submit" value="Save" class="button" />
+                                </div>
+                            </div>
+
+                        </fieldset>
+                    </form>
+
+                </div>
+            </div>
+        </section>    
+
+    </div> <!-- container -->
+
+    <!-- Check for Zepto support, load jQuery if necessary -->
+    <script>
+        document.write('<script src=/js/vendor/'
+          + ('__proto__' in {} ? 'zepto' : 'jquery')
+          + '.js><\/script>');
+    </script>
+
+    <script src="/js/foundation.min.js"></script>
+
+    <script>
+        $(document).foundation();
+    </script>
+
+</body>
+</html>

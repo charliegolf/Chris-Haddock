@@ -1,0 +1,91 @@
+﻿@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<IEnumerable<Haddock.Web.ViewModels.SessionInfoViewModel>>
+<!DOCTYPE html>
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en"> <!--<![endif]-->
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+
+    <title>Sessions</title>
+
+    <link rel="stylesheet" href="/content/css/normalize.css" />
+    <link rel="stylesheet" href="/content/css/foundation.min.css" />
+
+    <script src="/content/js/custom.modernizr.js"></script>
+
+    <!-- IE Fix for HTML5 Tags -->
+	<!--[if lt IE 9]>
+		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+
+</head>
+<body>
+
+    <div class="container">
+
+        <header>
+            <div class="row">
+                <div class="twelve columns">
+                    <h1>Sessions</h1>
+                </div>
+            </div>
+        </header>
+
+        <section id="mainContent">
+            <div class="row">
+                <div class="twelve columns">
+                    <p><a href="/session/new/">Start a new session</a></p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="twelve columns">
+
+                    <table>
+                        <tr>
+                            <th>DbKey</th>
+                            <th>Team</th>
+                            <th>Iteration</th>
+                            <th>Area</th>
+                            <th>Tester</th>
+                            <th>Mission</th>
+                        </tr>
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td><a href="/sessions/@item.Id">@item.Id</a></td>
+                            <td>@item.Team</td>
+                            <td>@item.Iteration</td>
+                            <td>@item.Area</td>
+                            <td>@item.Tester</td>
+                            <td>@item.Mission</td>
+                        </tr>
+                    }
+                    </table>
+
+                </div>
+            </div>
+        </section>    
+
+    </div> <!-- container -->
+
+    <!-- Check for Zepto support, load jQuery if necessary -->
+    <script>
+        document.write('<script src=/js/vendor/'
+          + ('__proto__' in {} ? 'zepto' : 'jquery')
+          + '.js><\/script>');
+    </script>
+
+    <script src="/js/foundation.min.js"></script>
+
+    <script>
+        $(document).foundation();
+    </script>
+
+</body>
+</html>
