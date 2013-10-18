@@ -13,6 +13,7 @@
 
     <link rel="stylesheet" href="/content/css/normalize.css" />
     <link rel="stylesheet" href="/content/css/foundation.min.css" />
+    <link rel="stylesheet" href="/content/css/styles.css" />
 
     <script src="/content/js/custom.modernizr.js"></script>
 
@@ -29,8 +30,8 @@
         <header>
             <div class="row">
                 <div class="twelve columns">
-                    <h1>Edit session</h1>
-                    <p><a href="/">home</a></p>
+                    <h1 class="titleColour">Edit session</h1>
+                    <p><a href="/" class="titleColour">home</a></p>
                 </div>
             </div>
         </header>
@@ -45,140 +46,169 @@
                         <fieldset>
                             <legend>Session details</legend>
 
-                            <div class="row">
-                                <div class="large-4 columns">
-                                    <label>Team</label>
+                            
+                             <div class="row">
+                                <div class="lookup" style ="float:left">
+                                    <label>&nbsp Team</label>
                                     <select id="TeamId" name="TeamId">
                                     @foreach (var team in Model.AllTeams)
                                     {
-                                        if (Model.TeamId == team.Id)
-                                        {
-                                            <option value="@team.Id" selected="selected">@team.Name</option>
-                                        }
-                                        else
-                                        {
-                                            <option value="@team.Id">@team.Name</option>
-                                        }
+                                        <option value="@team.Id">@team.Name</option>
                                     }
                                     </select>
-                                </div>
+                                 </div>  
 
-                                <div class="large-4 columns">
-                                    <label>Iteration</label>
+                                 <div class="lookup" style ="margin-left:250px">
+                                    <label>&nbsp Iteration</label>
                                     <select id="IterationId" name="IterationId">
                                     @foreach (var iter in Model.AllIterations)
                                     {
-                                        if (Model.IterationId == iter.Id)
-                                        {
-                                            <option value="@iter.Id" selected="selected">@iter.Name</option>
-                                        }
-                                        else
-                                        {
-                                            <option value="@iter.Id">@iter.Name</option>
-                                        }
+                                        <option value="@iter.Id">@iter.Name</option>
                                     }
                                     </select>
                                 </div>
-
-                                <div class="large-4 columns">
-                                    <label>Product Area</label>
+                            </div>
+                            <br />                          
+                            <div class="row">
+                                <div class="lookup" style ="float:left">
+                                    <label>&nbsp Product Area</label>
                                     <select id="ProductAreaId" name="ProductAreaId">
                                     @foreach (var productArea in Model.AllProductAreas)
                                     {
-                                        if (Model.ProductAreaId == productArea.Id)
-                                        {
-                                            <option value="@productArea.Id" selected="selected">@productArea.Name</option>
-                                        }
-                                        else
-                                        {
-                                            <option value="@productArea.Id">@productArea.Name</option>
-                                        }
+                                        <option value="@productArea.Id">@productArea.Name</option>
                                     }
                                     </select>
                                 </div>
-                            </div>
 
-                            <div class="row">
-                                <div class="large-6 columns">
-                                    <label>Tester</label>
+                                <div class="lookup" style ="margin-left:250px">
+                                    <label>&nbsp Tester</label>
                                     <select id="TesterId" name="TesterId">
                                     @foreach (var tester in Model.AllTesters)
                                     {
-                                        if (Model.TesterId == tester.Id)
-                                        {
-                                            <option value="@tester.Id" selected="selected">@tester.Name</option>
-                                        }
-                                        else
-                                        {   
-                                            <option value="@tester.Id">@tester.Name</option>
-                                        }
+                                        <option value="@tester.Id">@tester.Name</option>
                                     }
                                     </select>
                                 </div>
                             </div>
 
-                            <div class="row">
-                                <div class="large-12 columns">
-                                    <label>Mission</label>
-                                    <textarea name="Mission" id="Mission" placeholder="Mission or charter for this session" >@Model.Mission</textarea>
+    <br />
+                        
+                                <div class="textArea">
+                                    <label>&nbsp Mission</label>
+                                    <textarea name="Mission" id="Mission" style="height:200px" placeholder="Mission or charter for this session" >@Model.Mission</textarea>
+                                </div>
+                        
+                              <br /> 
+                            <div class="textContainer">
+                                <div class="textArea">
+                                    <label>&nbsp Setup</label>
+                                    <textarea name="Setup" id="Setup" style="height:200px" placeholder="Machine(s) setup" >@Model.Setup</textarea>
+                                </div>
+                            </div>
+                             <br />
+                             <br />
+        
+                            <table style="width: 100%;">
+                                <tr>
+                                   <td>  
+                                <div class="datePicker">
+                                   <label>&nbsp Date</label>
+                                   <input name="Date" type="text" id="datepicker">@Model.Date</>
+                                </div>
+                                </td>
+                                    <td>  
+
+                                <div class="timer">
+                                    <label>&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp Timer</label>
+                                    <input name="Duration" id="clock" value="00:00:0"  readonly="" type="text"><br />
+                                    <input  id="startstopbutton" value="Start" onclick="startstop();" type="button" style="margin-left:20%">
+                                    <input id="resetbutton" value="Reset" onclick="resetclock();" type="button" style="margin-left:30%">
+                                </div>   
+                                </td>
+
+                                   <td>  <div class="checkBox" style="margin-left:30%"> 
+                                   <label>&nbsp Cloud</label>
+                                   <input name="Cloud" id="Cloud" type="checkbox" style="margin-left:30%"/>
+                                   <label>&nbsp OnPremise</label>
+                                   <input name="OnPremise" id="OnPremise" type="checkbox" style="margin-left:30%"/>
+                               </div>
+                               </td>
+                               </tr>
+
+                            <table style="width: 100%;">
+                                <tr>
+                                    <td><div class="lookup" style ="float:left">
+                                    <label>&nbsp Inherited Risk</label>
+                                    <select id="InheritedRiskId" risk="InheritedRiskId">
+                                    @foreach (var inheritedRisk in Model.AllInheritedRisks)
+                                    {
+                                        <option value="@inheritedRisk.Id">@inheritedRisk.Name</option>
+                                    }
+ 
+                                    </select>
+                                </div>
+
+                                    </td>
+                                      
+                                    <td><div class="attach">
+                                        <label>&nbsp Attachments</label>
+                                        <input name ="Attachments" id="File1" type="file" />@Model.Attachments</>
+                                        </div>
+                                    </td>
+                                    </tr>
+                                <td>&nbsp;</td>
+
+                                </table>
+                           <br />
+
+     <div class="textContainer">
+                                <div class="textArea">
+                                    <label>&nbsp Risks to mitigate</label>
+                                    <textarea name="RisksToMitigate" id="RisksToMitigate" style="height:200px" placeholder="Risks addressed in this session" >@Model.RisksToMitigate</textarea>
+                                </div>
+                            </div>
+                              <br /> 
+                            <div class="textContainer">
+                                <div class="textArea">
+                                    <label>&nbsp Tasks</label>
+                                    <textarea name="Tasks" id="Tasks" style="height:200px" placeholder="How testing was done" >@Model.Tasks</textarea>
+                                </div>
+                            </div>
+                              <br /> 
+                            <div class="textContainer">
+                                <div class="textArea">
+                                    <label>&nbsp Bugs</label>
+                                    <textarea name="Bugs" id="Bugs" style="height:200px" placeholder="Any bugs found" >@Model.Bugs</textarea>
+                                </div>
+                            </div>
+                              <br /> 
+                            <div class="textContainer">
+                                <div class="textArea">
+                                    <label>&nbsp Issues</label>
+                                    <textarea name="Issues" id="Issues" style="height:200px" placeholder="Any issues, questions, concerns" >@Model.Issues</textarea>
+                                </div>
+                            </div>
+                              <br /> 
+                            <div class="textContainer">
+                                <div class="textArea">
+                                    <label>&nbsp Notes</label>
+                                    <textarea name="Notes" id="Notes" style="height:200px" placeholder="General notes" >@Model.Notes</textarea>
+                                </div>
+                            </div>
+                              <br /> 
+                            <div class="textContainer">
+                                <div class="textArea">
+                                    <label>&nbsp Handover</label>
+                                    <textarea name="Handover" id="Handover" style="height:200px" placeholder="Handover notes" >@Model.Handover</textarea>
+                                </div>
+                            </div>
+                              <br /> 
+                            <div class="Container">
+                                <div>
+                                    <input type="submit" value="Add new" class="button"/>
                                 </div>
                             </div>
 
-                            <div class="row">
-                                <div class="large-12 columns">
-                                    <label>Setup</label>
-                                    <textarea name="Setup" id="Setup" placeholder="Machine(s) setup" >@Model.Setup</textarea>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="large-12 columns">
-                                    <label>Risks to mitigate</label>
-                                    <textarea name="RisksToMigate" id="RisksToMigate" placeholder="Risks addressed in this session" >@Model.RisksToMitigate</textarea>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="large-12 columns">
-                                    <label>Tasks</label>
-                                    <textarea name="Tasks" id="Tasks" placeholder="How testing was done" >@Model.Tasks</textarea>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="large-12 columns">
-                                    <label>Bugs</label>
-                                    <textarea name="Bugs" id="Bugs" placeholder="Any bugs found" >@Model.Bugs</textarea>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="large-12 columns">
-                                    <label>Issues</label>
-                                    <textarea name="Issues" id="Issues" placeholder="Any issues, questions, concerns" >@Model.Issues</textarea>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="large-12 columns">
-                                    <label>Notes</label>
-                                    <textarea name="Notes" id="Notes" placeholder="General notes" >@Model.Notes</textarea>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="large-12 columns">
-                                    <label>Handover</label>
-                                    <textarea name="Handover" id="Handover" placeholder="Handover notes" >@Model.Handover</textarea>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="large-12 columns">
-                                    <input type="hidden" id="Id" name="Id" value="@Model.Id" />
-                                    <input type="submit" value="Save" class="button" />
-                                </div>
-                            </div>
 
                         </fieldset>
                     </form>

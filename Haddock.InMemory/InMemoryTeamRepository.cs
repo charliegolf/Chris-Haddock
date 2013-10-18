@@ -11,6 +11,7 @@ namespace Haddock.InMemory
         private List<Iteration> _iterations = new List<Iteration>();
         private List<Team> _teams = new List<Team>();
         private List<Tester> _testers = new List<Tester>();
+        private List<InheritedRisk> _inheritedRisks = new List<InheritedRisk>();
 
         public InMemoryTeamRepository()
         {
@@ -40,6 +41,13 @@ namespace Haddock.InMemory
             this._testers.Add(new Tester { Id = ++dbKey, Name = "Marc" });
             this._testers.Add(new Tester { Id = ++dbKey, Name = "Darren" });
             this._testers.Add(new Tester { Id = ++dbKey, Name = "Kaye" });
+
+
+            this._inheritedRisks.Add(new InheritedRisk { Id = ++dbKey, Name = "1 High" });
+            this._inheritedRisks.Add(new InheritedRisk { Id = ++dbKey, Name = "2 Medium" });
+            this._inheritedRisks.Add(new InheritedRisk { Id = ++dbKey, Name = "3 Low" });
+
+    
         }
 
         public ReadOnlyCollection<Iteration> ListIterations()
@@ -60,6 +68,11 @@ namespace Haddock.InMemory
         public ReadOnlyCollection<Tester> ListTesters()
         {
             return new ReadOnlyCollection<Tester>(this._testers);
+        }
+
+        public ReadOnlyCollection<InheritedRisk> ListInheritedRisks()
+        {
+            return new ReadOnlyCollection<InheritedRisk>(this._inheritedRisks);
         }
     }
 }

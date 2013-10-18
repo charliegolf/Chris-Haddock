@@ -31,5 +31,11 @@ namespace Haddock.Core
         /// </summary>
         /// <returns></returns>
         ReadOnlyCollection<Tester> ListTesters();
+
+        /// <summary>
+        /// All inherited risks.
+        /// </summary>
+        /// <returns></returns>
+        ReadOnlyCollection<InheritedRisk> ListInheritedRisks();
     }
 }

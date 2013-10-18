@@ -34,6 +34,11 @@ namespace Haddock.Web.ViewModels
         public int TesterId { get; set; }
 
         /// <summary>
+        /// Risk inherited Db Key.
+        /// </summary>
+        public int InheritedRiskId { get; set; }
+
+        /// <summary>
         /// Mission of the session
         /// </summary>
         public string Mission { get; set; }
@@ -47,7 +52,7 @@ namespace Haddock.Web.ViewModels
         /// When this session was started.
         /// </summary>
         public DateTime Started { get; set; }
-
+         
         /// <summary>
         /// Risks that are the focus of this session.
         /// </summary>
@@ -62,6 +67,16 @@ namespace Haddock.Web.ViewModels
         /// Bugs identified in this session.
         /// </summary>
         public string Bugs { get; set; }
+
+        /// <summary>
+        /// Is Cloud.
+        /// </summary>
+        public Boolean Cloud { get; set; }
+
+        /// <summary>
+        /// Is on premise.
+        /// </summary>
+        public Boolean OnPremise { get; set; }
 
         /// <summary>
         /// Issues identified in this session.
@@ -84,23 +99,39 @@ namespace Haddock.Web.ViewModels
         public DateTime Ended { get; set; }
 
         /// <summary>
+        /// When this session was carried out.
+        /// </summary>
+        public string Date { get; set; }
+
+        /// <summary>
+        /// Time taken to carry out this session.
+        /// </summary>
+        public string Duration { get; set; }
+
+        /// <summary>
+        /// Attachments.
+        /// </summary>
+        public Object Attachments { get; set; }
+
+
+        /// <summary>
         /// Length of this session 
         /// </summary>
-        public string Duration 
-        {
-            get
-            {
-                if (this.Started == DateTime.MinValue)
-                    return "Not started";
+        ///public string Duration 
+        ///{
+        ///    get
+        ///    {
+        ///        if (this.Started == DateTime.MinValue)
+        ///            return "Not started";
 
-                if (this.Ended == DateTime.MinValue)
-                    return "Open";
+        ///        if (this.Ended == DateTime.MinValue)
+        ///            return "Open";
 
-                TimeSpan length = this.Ended - this.Started;
+        ///        TimeSpan length = this.Ended - this.Started;
 
-                return length.ToString("h'h 'm'm 's's'");
-            }
-        }
+        ///        return length.ToString("h'h 'm'm 's's'");
+       ///     }
+     ///   }
 
     }
 }

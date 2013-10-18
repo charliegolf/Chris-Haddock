@@ -1,0 +1,138 @@
+﻿
+@charset='utf-8'; 
+
+
+.titleColour
+{
+    color: #94B098;
+}
+ 
+.imagewrapper
+ {
+ background:url(images/banner2.png);
+ background-position: 0% 0%;
+ background-repeat: no-repeat;
+ margin-top:20px;
+ } 
+ 
+
+
+  .lookup
+ {
+    margin:15px;
+    border:1px solid;
+    border-radius:5px;
+    box-shadow: 2px 2px 5px #888;
+    width: 200px;
+    height: 50px;
+  	background: #F7FAF8;
+ 
+ }
+
+    .attach
+ {
+    margin:15px;
+    border:1px solid;
+    border-radius:5px;
+    box-shadow: 2px 2px 5px #888;
+    width: 250px;
+    height: 50px;
+  	background: #F7FAF8;
+ 
+ }
+ 
+  .datePicker
+ {
+    border:1px solid;
+    border-radius:5px;
+    box-shadow: 2px 2px 5px #888;
+    width: 100px;
+    background: #F7FAF8;
+ 
+ } 
+
+    .checkBox
+ {
+    border:1px solid;
+    border-radius:5px;
+    box-shadow: 2px 2px 5px #888;
+    width: 150px;
+    background: #F7FAF8;
+ 
+ } 
+
+    .textContainer
+ {  
+    border:1px solid;
+    border-radius:5px;
+    box-shadow: 2px 2px 5px #888;
+	background: #F7FAF8;
+    height:250px;
+
+ }
+
+  .textArea
+ {  
+
+    border:1px solid;
+    border-radius:5px;
+    box-shadow: 2px 2px 5px #888;
+    background: #F7FAF8;
+    height:250px;   
+ }
+
+
+ 
+ .timer
+ {
+    border:1px solid;
+    border-radius:5px;
+    box-shadow: 2px 2px 5px #888;
+   	background: #F7FAF8;
+       height:110px;  
+ }
+ 
+
+
+ .input
+ {
+     margin-left:35px;
+     background: #F7FAF8;
+     line-height: 1;
+     padding:0;
+ }
+ 
+ .h2
+ {
+     margin-left:35px; 
+}
+
+  .button
+ {
+    border:1px solid;
+    border-radius:5px;
+    box-shadow: 2px 2px 5px #888;
+   	background: #F7FAF8;
+ }
+
+  .button {
+  border-style: 1px solid;
+  border-radius:5px;
+  cursor: pointer;
+  font-family: inherit;
+  font-weight: bold;
+  line-height: 1;
+  margin: 0 0 1.25em;
+  position: relative;
+  text-decoration: none;
+  text-align: center;
+  display: inline-block;
+  padding-top: 0.75em;
+  padding-right: 1.5em;
+  padding-bottom: 0.8125em;
+  padding-left: 1.5em;
+  font-size: 1em;
+  background-color: white;
+  color: #94B098; }
+
+

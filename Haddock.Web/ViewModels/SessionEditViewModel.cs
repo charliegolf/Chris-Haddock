@@ -4,6 +4,7 @@ namespace Haddock.Web.ViewModels
     using Haddock.Core;
     using System.Collections.Generic;
     using System.Linq;
+    using System;
 
     /// <summary>
     /// View model used to create/edit session.
@@ -38,6 +39,14 @@ namespace Haddock.Web.ViewModels
         /// List of available testers populated from the ITeamRepository.
         /// </summary>
         public ICollection<Tester> AllTesters { get; set; }
+
+        public InheritedRisk SelectedInheritedRisk { get; set; }
+        
+        /// <summary>
+        /// List of Inherited Risk values ITeamRepository.
+        /// </summary>
+        public ICollection<InheritedRisk> AllInheritedRisks { get; set; }
+
 
         public void SelectTeam(string teamName)
         {
@@ -75,6 +84,15 @@ namespace Haddock.Web.ViewModels
             }
         }
 
+        public void SelectInheritedRisk(string inheritedRiskName)
+        {
+            if (this.AllInheritedRisks != null && this.AllInheritedRisks.Any())
+            {
+                this.SelectedInheritedRisk = this.AllInheritedRisks.FirstOrDefault(
+                    r => string.Compare(r.Name, inheritedRiskName, false) == 0);
+            }
+        }
+
         /// <summary>
         /// Create a new instance will drop downs populated by the team repository.
         /// </summary>
@@ -88,6 +106,7 @@ namespace Haddock.Web.ViewModels
             model.AllIterations = teamRepo.ListIterations();
             model.AllTeams = teamRepo.ListTeams();
             model.AllTesters = teamRepo.ListTesters();
+            model.AllInheritedRisks = teamRepo.ListInheritedRisks();
 
             return model;
         }
@@ -116,7 +135,13 @@ namespace Haddock.Web.ViewModels
                 RisksToMitigate = detail.RisksToMitigate,
                 Setup = detail.Setup,
                 Started = detail.Started,
-                Tasks = detail.Tasks
+                Tasks = detail.Tasks,
+                Date = detail.Date,
+                Duration = detail.Duration,
+                Cloud = detail.Cloud,
+                OnPremise = detail.OnPremise,
+                Attachments = detail.Attachments
+                
             };
               
             model.AllProductAreas = teamRepo.ListProductAreas();
@@ -130,6 +155,9 @@ namespace Haddock.Web.ViewModels
 
             model.AllTesters = teamRepo.ListTesters();
             model.SelectTester(detail.Tester);
+
+            model.AllInheritedRisks = teamRepo.ListInheritedRisks();
+            model.SelectInheritedRisk(detail.InheritedRisk);
 
             return model;
         }
@@ -154,13 +182,21 @@ namespace Haddock.Web.ViewModels
                     RisksToMitigate = this.RisksToMitigate,
                     Setup = this.Setup,
                     Started = this.Started,
-                    Tasks = this.Tasks
+                    Tasks = this.Tasks,
+                    Date = this.Date,
+                    Cloud = this.Cloud,
+                    OnPremise = this.OnPremise,
+                    Duration = this.Duration,
+                    Attachments = this.Attachments
+                    
+                    
                 };
 
             var area = teamRepo.ListProductAreas().FirstOrDefault(a => a.Id == this.ProductAreaId);
             var iter = teamRepo.ListIterations().FirstOrDefault(i => i.Id == this.IterationId);
             var team = teamRepo.ListTeams().FirstOrDefault(t => t.Id == this.TeamId);
             var tester = teamRepo.ListTesters().FirstOrDefault(t => t.Id == this.TesterId);
+            var inheritedRisk = teamRepo.ListInheritedRisks().FirstOrDefault(r => r.Id == this.InheritedRiskId);
 
             if (area != null)
             {
@@ -180,6 +216,12 @@ namespace Haddock.Web.ViewModels
             if (tester != null)
             {
                 detail.Tester = tester.Name;
+            }
+
+
+            if (inheritedRisk != null)
+            {
+                detail.InheritedRisk = inheritedRisk.Name;
             }
 
             return detail;

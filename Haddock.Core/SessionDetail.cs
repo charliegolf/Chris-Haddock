@@ -23,6 +23,11 @@ namespace Haddock.Core
         public string Iteration { get; set; }
 
         /// <summary>
+        /// Attachments.
+        /// </summary>
+        public Object Attachments { get; set; }
+
+        /// <summary>
         /// Product area name.
         /// </summary>
         public string Area { get; set; }
@@ -46,6 +51,26 @@ namespace Haddock.Core
         /// When this session was started.
         /// </summary>
         public DateTime Started { get; set; }
+
+        /// <summary>
+        /// Time taken to carry out sesion.
+        /// </summary>
+        public string Duration { get; set; }
+        
+        /// <summary>
+        /// Is Cloud.
+        /// </summary>
+        public Boolean Cloud { get; set; }
+        
+        /// <summary>
+        /// Is on premise.
+        /// </summary>
+        public Boolean OnPremise { get; set; }
+        
+        /// <summary>
+        /// Risk inherited from feature document.
+        /// </summary>
+        public string InheritedRisk { get; set; }
 
         /// <summary>
         /// Risks that are the focus of this session.
@@ -78,9 +103,15 @@ namespace Haddock.Core
         public string Handover { get; set; }
 
         /// <summary>
+        /// Date of this session.
+        /// </summary>
+        public string Date { get; set; }
+
+        /// <summary>
         /// When this session was ended.
         /// </summary>
         public DateTime Ended { get; set; }
 
+      
     }
 }

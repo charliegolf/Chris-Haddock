@@ -9,28 +9,152 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
 
+   
+
     <title>New Session</title>
 
-    <link rel="stylesheet" href="/content/css/normalize.css" />
+    <!--<link rel="stylesheet" href="/content/css/normalize.css" /> -->
     <link rel="stylesheet" href="/content/css/foundation.min.css" />
+    <link rel="stylesheet" href="/content/css/styles.css" />
+
+  <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+  <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+  <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+  <link rel="stylesheet" href="/resources/demos/style.css" />
+
+
 
     <script src="/content/js/custom.modernizr.js"></script>
-
+  
+      
     <!-- IE Fix for HTML5 Tags -->
 	<!--[if lt IE 9]>
 		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 	<![endif]-->
 
+
+     
+<script type="text/javascript" charset="utf-8">
+    var flagclock = 0;
+    var flagstop = 0;
+    var stoptime = 0;
+    var splitcounter = 0;
+    var currenttime;
+    var splitdate = '';
+    var output;
+    var clock; function startstop() {
+        var startstop = document.getElementById('startstopbutton');
+        var startdate = new Date();
+        var starttime = startdate.getTime();
+        if (flagclock == 0) {
+            startstop.value = 'Stop';
+            flagclock = 1;
+            counter(starttime);
+        }
+        else {
+            startstop.value = 'Start';
+            flagclock = 0;
+            flagstop = 1;
+            splitdate = '';
+        }
+    }
+
+    function counter(starttime) {
+        output = document.getElementById('output');
+        clock = document.getElementById('clock');
+        currenttime = new Date();
+        var timediff = currenttime.getTime() - starttime;
+        if (flagstop == 1) {
+            timediff = timediff + stoptime
+        }
+        if (flagclock == 1) {
+            clock.value = formattime(timediff, '');
+            refresh = setTimeout('counter(' + starttime + ');', 10);
+        }
+        else {
+            window.clearTimeout(refresh);
+            stoptime = timediff;
+        }
+    }
+
+    function formattime(rawtime, roundtype) {
+        if (roundtype == 'round') {
+            var ds = Math.round(rawtime / 100) + '';
+        }
+        else {
+            var ds = Math.floor(rawtime / 100) + '';
+        }
+        var sec = Math.floor(rawtime / 1000);
+        var min = Math.floor(rawtime / 60000);
+        ds = ds.charAt(ds.length - 1);
+        if (min >= 60) {
+            startstop();
+        }
+        sec = sec - 60 * min + '';
+        if (sec.charAt(sec.length - 2) != '') {
+            sec = sec.charAt(sec.length - 2) + sec.charAt(sec.length - 1);
+        }
+        else {
+            sec = 0 + sec.charAt(sec.length - 1);
+        }
+        min = min + '';
+        if (min.charAt(min.length - 2) != '') {
+            min = min.charAt(min.length - 2) + min.charAt(min.length - 1);
+        }
+        else {
+            min = 0 + min.charAt(min.length - 1);
+        }
+        return min + ':' + sec + ':' + ds;
+    }
+
+    function resetclock() {
+        flagstop = 0;
+        stoptime = 0;
+        splitdate = '';
+        window.clearTimeout(refresh);
+        splitcounter = 0;
+        if (flagclock == 1) {
+            var resetdate = new Date();
+            var resettime = resetdate.getTime();
+            counter(resettime);
+        }
+        else {
+            clock.value = "00:00:0";
+        }
+    }
+
+
+</script>
+
+
+<script>
+
+    $(function () {
+
+        $("#datepicker").datepicker();
+
+    });
+
+</script>
+
+<style type="text/css">
+body
+{
+    background-image:url(../Content/images/background.jpg);
+}
+
+</style>
+
 </head>
 <body>
-
-        <div class="container">
+       <div class="container">
 
         <header>
+
             <div class="row">
                 <div class="twelve columns">
-                    <h1>Create a new session</h1>
-                    <p><a href="/">home</a></p>
+                    <p><a href="/" class="titleColour">Back to session list</a>
+                    <h1 class="titleColour">New Session</h1>
                 </div>
             </div>
         </header>
@@ -43,21 +167,21 @@
                     <form action="/session/new/" method="post">
 
                         <fieldset>
-                            <legend>Session details</legend>
+                            <legend class="titleColour">Session details</legend>
 
-                            <div class="row">
-                                <div class="large-4 columns">
-                                    <label>Team</label>
+                             <div class="row">
+                                <div class="lookup" style ="float:left">
+                                    <label>&nbsp Team</label>
                                     <select id="TeamId" name="TeamId">
                                     @foreach (var team in Model.AllTeams)
                                     {
                                         <option value="@team.Id">@team.Name</option>
                                     }
                                     </select>
-                                </div>
+                                 </div>  
 
-                                <div class="large-4 columns">
-                                    <label>Iteration</label>
+                                 <div class="lookup" style ="margin-left:250px">
+                                    <label>&nbsp Iteration</label>
                                     <select id="IterationId" name="IterationId">
                                     @foreach (var iter in Model.AllIterations)
                                     {
@@ -65,9 +189,11 @@
                                     }
                                     </select>
                                 </div>
-
-                                <div class="large-4 columns">
-                                    <label>Product Area</label>
+                            </div>
+                            <br />                          
+                            <div class="row">
+                                <div class="lookup" style ="float:left">
+                                    <label>&nbsp Product Area</label>
                                     <select id="ProductAreaId" name="ProductAreaId">
                                     @foreach (var productArea in Model.AllProductAreas)
                                     {
@@ -75,11 +201,9 @@
                                     }
                                     </select>
                                 </div>
-                            </div>
 
-                            <div class="row">
-                                <div class="large-6 columns">
-                                    <label>Tester</label>
+                                <div class="lookup" style ="margin-left:250px">
+                                    <label>&nbsp Tester</label>
                                     <select id="TesterId" name="TesterId">
                                     @foreach (var tester in Model.AllTesters)
                                     {
@@ -88,72 +212,125 @@
                                     </select>
                                 </div>
                             </div>
-
-                            <div class="row">
-                                <div class="large-12 columns">
-                                    <label>Mission</label>
-                                    <textarea name="Mission" id="Mission" placeholder="Mission or charter for this session" >@Model.Mission</textarea>
+                            <br />
+                        
+                                <div class="textArea">
+                                    <label>&nbsp Mission</label>
+                                    <textarea name="Mission" id="Mission" style="height:200px" placeholder="Mission or charter for this session" >@Model.Mission</textarea>
+                                </div>
+                        
+                              <br /> 
+                            <div class="textContainer">
+                                <div class="textArea">
+                                    <label>&nbsp Setup</label>
+                                    <textarea name="Setup" id="Setup" style="height:200px" placeholder="Machine(s) setup" >@Model.Setup</textarea>
                                 </div>
                             </div>
+                              <br />
+                          
+                            <br /> 
+                            <table style="width: 100%;">
+                                <tr>
+                                   <td>  
+                                <div class="datePicker">
+                                   <label>&nbsp Date</label>
+                                   <input name="Date" type="text" id="datepicker">@Model.Date</>
+                                </div>
+                                </td>
+                                    <td>  
 
-                            <div class="row">
-                                <div class="large-12 columns">
-                                    <label>Setup</label>
-                                    <textarea name="Setup" id="Setup" placeholder="Machine(s) setup" >@Model.Setup</textarea>
+                                <div class="timer">
+                                    <label>&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp Timer</label>
+                                    <input name="Duration" id="clock" value="00:00:0"  readonly="" type="text">
+                                    <input id="startstopbutton" value="Start" onclick="startstop();" type="button" style="margin-left:20%">
+                                    <input id="resetbutton" value="Reset" onclick="resetclock();" type="button" style="margin-left:30%">
+                                </div>   
+                                </td>
+
+                                   <td>  <div class="checkBox" style="margin-left:30%"> 
+                                   <label>&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp Cloud</label>
+                                   <input name="Cloud" id="Cloud" type="checkbox" style="margin-left:40%"/>
+                                   <label>&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp OnPremise</label>
+                                   <input name="OnPremise" id="OnPremise" type="checkbox" style="margin-left:40%"/>
+                               </div>
+                               </td>
+                               </tr>
+
+                            <table style="width: 100%;">
+                                <tr>
+                                    <td><div class="lookup" style ="float:left">
+                                    <label>&nbsp Inherited Risk</label>
+                                    <select id="InheritedRiskId" name="InheritedRiskId">
+                                          @foreach (var inheritedRisk in Model.AllInheritedRisks)
+                                    {
+                                        <option value="@inheritedRisk.Id">@inheritedRisk.Name</option>
+                                    }
+ 
+                                    </select>
+                                </div>
+
+                                    </td>
+                                      
+                                    <td><div class="attach">
+                                        <label>&nbsp Attachments</label>
+                                        <input name ="Attachments" id="File1" type="file" />@Model.Attachments</>
+                                        </div>
+                                    </td>
+                                    </tr>
+                                <td>&nbsp;</td>
+
+                                </table>
+                           <br />
+                            <div class="textContainer">
+                                <div class="textArea">
+                                    <label>&nbsp Risks to mitigate</label>
+                                    <textarea name="RisksToMitigate" id="RisksToMitigate" style="height:200px" placeholder="Risks addressed in this session" >@Model.RisksToMitigate</textarea>
                                 </div>
                             </div>
-
-                            <div class="row">
-                                <div class="large-12 columns">
-                                    <label>Risks to mitigate</label>
-                                    <textarea name="RisksToMigate" id="RisksToMigate" placeholder="Risks addressed in this session" >@Model.RisksToMitigate</textarea>
+                              <br /> 
+                            <div class="textContainer">
+                                <div class="textArea">
+                                    <label>&nbsp Tasks</label>
+                                    <textarea name="Tasks" id="Tasks" style="height:200px" placeholder="How testing was done" >@Model.Tasks</textarea>
                                 </div>
                             </div>
-
-                            <div class="row">
-                                <div class="large-12 columns">
-                                    <label>Tasks</label>
-                                    <textarea name="Tasks" id="Tasks" placeholder="How testing was done" >@Model.Tasks</textarea>
+                              <br /> 
+                            <div class="textContainer">
+                                <div class="textArea">
+                                    <label>&nbsp Bugs</label>
+                                    <textarea name="Bugs" id="Bugs" style="height:200px" placeholder="Any bugs found" >@Model.Bugs</textarea>
                                 </div>
                             </div>
-
-                            <div class="row">
-                                <div class="large-12 columns">
-                                    <label>Bugs</label>
-                                    <textarea name="Bugs" id="Bugs" placeholder="Any bugs found" >@Model.Bugs</textarea>
+                              <br /> 
+                            <div class="textContainer">
+                                <div class="textArea">
+                                    <label>&nbsp Issues</label>
+                                    <textarea name="Issues" id="Issues" style="height:200px" placeholder="Any issues, questions, concerns" >@Model.Issues</textarea>
                                 </div>
                             </div>
-
-                            <div class="row">
-                                <div class="large-12 columns">
-                                    <label>Issues</label>
-                                    <textarea name="Issues" id="Issues" placeholder="Any issues, questions, concerns" >@Model.Issues</textarea>
+                              <br /> 
+                            <div class="textContainer">
+                                <div class="textArea">
+                                    <label>&nbsp Notes</label>
+                                    <textarea name="Notes" id="Notes" style="height:200px" placeholder="General notes" >@Model.Notes</textarea>
                                 </div>
                             </div>
-
-                            <div class="row">
-                                <div class="large-12 columns">
-                                    <label>Notes</label>
-                                    <textarea name="Notes" id="Notes" placeholder="General notes" >@Model.Notes</textarea>
+                              <br /> 
+                            <div class="textContainer">
+                                <div class="textArea">
+                                    <label>&nbsp Handover</label>
+                                    <textarea name="Handover" id="Handover" style="height:200px" placeholder="Handover notes" >@Model.Handover</textarea>
                                 </div>
                             </div>
-
-                            <div class="row">
-                                <div class="large-12 columns">
-                                    <label>Handover</label>
-                                    <textarea name="Handover" id="Handover" placeholder="Handover notes" >@Model.Handover</textarea>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="large-12 columns">
-                                    <input type="submit" value="Add new" class="button" />
+                              <br /> 
+                            <div>
+                                <div>
+                                <input type="submit" value="Submit Session" class="button"/>
                                 </div>
                             </div>
 
                         </fieldset>
                     </form>
-
                 </div>
             </div>
         </section>    
@@ -161,13 +338,14 @@
     </div> <!-- container -->
 
     <!-- Check for Zepto support, load jQuery if necessary -->
-    <script>
-        document.write('<script src=/js/vendor/'
-          + ('__proto__' in {} ? 'zepto' : 'jquery')
-          + '.js><\/script>');
-    </script>
 
-    <script src="/js/foundation.min.js"></script>
+<script>
+    document.write('<script src=/js/vendor/'
+      + ('__proto__' in {} ? 'zepto' : 'jquery')
+      + '.js><\/script>');
+</script>
+
+<script src="/js/foundation.min.js"></script>
 
     <script>
         $(document).foundation();

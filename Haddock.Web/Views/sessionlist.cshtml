@@ -14,6 +14,7 @@
 
     <link rel="stylesheet" href="/content/css/normalize.css" />
     <link rel="stylesheet" href="/content/css/foundation.min.css" />
+    <link rel="stylesheet" href="/content/css/styles.css" />
 
     <script src="/content/js/custom.modernizr.js"></script>
 
@@ -30,7 +31,7 @@
         <header>
             <div class="row">
                 <div class="twelve columns">
-                    <h1>Sessions</h1>
+                    <h1 class="titleColour">Sessions</h1>
                 </div>
             </div>
         </header>
@@ -38,7 +39,7 @@
         <section id="mainContent">
             <div class="row">
                 <div class="twelve columns">
-                    <p><a href="/session/new/">Start a new session</a></p>
+                    <p><a href="/session/new/" class="titleColour">Start a new session</a></p>
                 </div>
             </div>
 
@@ -53,17 +54,44 @@
                             <th>Area</th>
                             <th>Tester</th>
                             <th>Mission</th>
+                            <th>Setup</th>
+                            <th>Date</th>
+                            <th>Duration</th>
+                            <th>Cloud</th>
+                            <th>OnPremise</th>
+                            <th>InheritedRisk</th>
+                            <th>Attachments</th>
+                            <th>RisksToMitigate</th>
+                            <th>Tasks</th>
+                            <th>Bugs</th>
+                            <th>Issues</th>
+                            <th>Notes</th>
+                            <th>Handover</th>
                         </tr>
 
                     @foreach (var item in Model)
                     {
                         <tr>
+                            
                             <td><a href="/sessions/@item.Id">@item.Id</a></td>
                             <td>@item.Team</td>
                             <td>@item.Iteration</td>
                             <td>@item.Area</td>
                             <td>@item.Tester</td>
                             <td>@item.Mission</td>
+                            <td>@item.Setup</td>
+                            <td>@item.Date</td>
+                            <td>@item.Duration</td>
+                            <td>@item.Cloud</td>
+                            <td>@item.OnPremise</td>
+                            <td>@item.InheritedRisk</td>
+                            <td>@item.Attachments</td>
+                            <td>@item.RisksToMitigate</td>
+                            <td>@item.Tasks</td>
+                            <td>@item.Bugs</td>
+                            <td>@item.Issues</td>
+                            <td>@item.Notes</td>
+                            <td>@item.Handover</td>
                         </tr>
                     }
                     </table>

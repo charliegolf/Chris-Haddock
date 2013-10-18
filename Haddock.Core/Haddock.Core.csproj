@@ -40,6 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IDatabaseSessionRepository.cs" />
+    <Compile Include="InheritedRisk.cs" />
     <Compile Include="ISessionRepository.cs" />
     <Compile Include="ITeamRepository.cs" />
     <Compile Include="Iteration.cs" />

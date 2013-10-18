@@ -43,6 +43,10 @@ namespace Haddock.InMemory
                 existing.Mission = detail.Mission;
                 existing.Team = detail.Team;
                 existing.Tester = detail.Tester;
+                existing.InheritedRisk = detail.InheritedRisk;
+                existing.RisksToMitigate = detail.RisksToMitigate;
+                existing.Date = detail.Date;
+                existing.Duration = detail.Duration;
             }
         }
 

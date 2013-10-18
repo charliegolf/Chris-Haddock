@@ -19,6 +19,8 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -77,9 +79,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Readme\Elmah.txt" />
+    <Content Include="Content\images\background.jpg" />
+    <Content Include="Content\css\app.css" />
     <Content Include="Content\css\foundation.css" />
     <Content Include="Content\css\foundation.min.css" />
     <Content Include="Content\css\normalize.css" />
+    <Content Include="Content\css\styles.css" />
     <Content Include="Content\js\custom.modernizr.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -89,7 +94,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bootstrapper.cs" />
-    <Content Include="Content\css\app.css" />
     <Compile Include="Modules\HomeModule.cs" />
     <Compile Include="Modules\SessionEditModule.cs" />
     <Compile Include="Modules\SessionReportModule.cs" />
@@ -162,6 +166,7 @@ xcopy /s /y /R "$(SolutionDir)packages\Nancy.Viewengines.Razor.0.15.3\BuildProvi
 xcopy /s /y /R "$(SolutionDir)packages\Nancy.Viewengines.Razor.0.15.3\lib\Net40\Nancy.ViewEngines.Razor.dll" "$(ProjectDir)bin\"
 )</PostBuildEvent>
   </PropertyGroup>
+  <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
